@@ -133,7 +133,8 @@ module Make
         else
           match has_significantly_lower_fee pool work ~fee:fee.fee ~sender with
           | Ok () ->
-              verify ()
+              Deferred.Or_error.error_string
+                "Don't include if not from us" )
           | _ ->
               Deferred.Or_error.error_string
                 "snark pool diff fee is not high enough to be included in \
